@@ -179,6 +179,7 @@ class Configuration (dict):
         self["aborttimeout"] = 300
         self["recursionlevel"] = -1
         self["useragent"] = UserAgent
+        self["bypassrobotstxt"] = ""
         ## authentication
         self["authentication"] = []
         self["loginurl"] = None

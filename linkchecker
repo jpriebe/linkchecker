@@ -366,6 +366,10 @@ group.add_argument("--user-agent", dest="useragent", metavar="STRING",
 """Specify the User-Agent string to send to the HTTP server, for example
 "Mozilla/4.0". The default is "LinkChecker/X.Y" where X.Y is the current
 version of LinkChecker."""))
+group.add_argument("--bypass-robotstxt", dest="bypassrobotstxt", metavar="STRING",
+                 help=_(
+"""Specify a regex that matches the URLs for which you want to bypass 
+robots.txt checking."""))
 
 argparser.add_argument('url', nargs='*')
 ################# auto completion #####################
@@ -540,6 +544,8 @@ for entry in config["authentication"]:
         entry["password"] = getpass.getpass(console.encode(msg))
 if options.useragent is not None:
     config["useragent"] = options.useragent
+if options.bypassrobotstxt is not None:
+    config["bypassrobotstxt"] = options.bypassrobotstxt
 if options.cookiefile is not None:
     if linkcheck.fileutil.is_readable(options.cookiefile):
         config["cookiefile"] = options.cookiefile

@@ -18,6 +18,7 @@
 Handle http links.
 """
 
+import re
 import requests
 # The validity of SSL certs is ignored to be able
 # the check the URL and recurse into it.
@@ -75,6 +76,9 @@ class HttpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         @return: True if access is granted, otherwise False
         @rtype: bool
         """
+        if self.aggregate.config["bypassrobotstxt"]:
+            if re.search (self.aggregate.config["bypassrobotstxt"], url):
+                return True
         return self.aggregate.robots_txt.allows_url(self)
 
     def content_allows_robots (self):
